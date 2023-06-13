@@ -1,7 +1,5 @@
-import { getProducts } from '@/service/product.service'
-import { Main } from 'next/document';
-import Image from 'next/image'
-
+import { getProducts } from "./services/product.service";
+import {Link} from 'next/link';
 export default async function Home() {
   const data = await getProducts({ page: 1});
 
@@ -11,9 +9,11 @@ export default async function Home() {
 
       {data.products.map((product) => (
           <article key = {product.id}>
+            <Link href ={`/products/${product.id}`}>
             <img src={product.thumbnail} alt = {product.title}>
-              <h3></h3>
+              <h3>{product.title}</h3>
             </img>
+            </Link>
           </article>
       ))}
     </main>  
